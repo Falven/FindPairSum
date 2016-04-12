@@ -45,6 +45,7 @@ public class Main {
     List<Pair<Long, Long>> expected = new ArrayList<>();
     expected.add(new Pair<Long, Long>(400L, 200L));
     expected.add(new Pair<Long, Long>(100L, 500L));
+
   }
 
   static List<Pair<Long, Long>> findSummingPairs(List<Long> numbers, Long goal) {
@@ -52,20 +53,16 @@ public class Main {
     for(int i = 0; i < numbers.size(); ++i) {
       lookup.put(numbers.get(i), i);
     }
-    // 400 -> 1
-    // 200 -> 2
-    // 100 -> 3
-    // 500 -> 4
-    // 300 -> 5
-    System.out.println(lookup);
+
     List<Pair<Long, Long>> pairs = new ArrayList<>();
     for(int i = 0; i < numbers.size(); ++i) {
-      Integer got = lookup.get(goal - numbers.get(i));
-      if (got != null) {
-        System.out.println("Pair: " + got + " has sum " + goal);
+      Long right = numbers.get(i);
+      Long left = goal - right;
+      if (lookup.get(left) != null) {
+        pairs.add(new Pair<>(left, right));
       }
     }
-    return null;
+    return pairs;
   }
 
 }
